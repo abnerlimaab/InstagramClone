@@ -16,7 +16,7 @@ fun HomeScreen() {
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).padding(top = 16.dp)) {
         InstagramToolBar()
 
-        StoryItem(story = Story("userNickName", "https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"))
+        StoryItem(story = Story("janedoe", "https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"))
     }
 }
 
