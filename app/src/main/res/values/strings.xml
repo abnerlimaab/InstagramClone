@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InstagramClone</string>
+    <string name="content_description_notification_icon">ícone de notificações na barra de ferramentas</string>
+    <string name="content_description_message_icon">ícone de mensagens diretas na barra de ferramentas</string>
+</resources>
