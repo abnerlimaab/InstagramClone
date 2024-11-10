@@ -21,7 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.instagramclone.R
-import com.example.instagramclone.data.Story
+import com.example.instagramclone.data.model.Story
+import com.example.instagramclone.data.repository.stories
 import com.example.instagramclone.ui.theme.StoryCircleColor
 import com.example.instagramclone.ui.theme.spacingSmall
 
@@ -59,5 +60,5 @@ fun StoryItem(story: Story) {
 @Preview(showBackground = true)
 @Composable
 fun StoryItemPreview() {
-    StoryItem(story = Story("userNickName", "userAvatar"))
+    StoryItem(story = stories[0])
 }
