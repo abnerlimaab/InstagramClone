@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.instagramclone.data.model.Feed
 import com.example.instagramclone.data.model.Story
 import com.example.instagramclone.data.repository.stories
 import com.example.instagramclone.ui.theme.DividerColor
@@ -30,6 +31,17 @@ fun HomeScreen() {
         StoryList(stories = stories)
 
         HorizontalDivider(color = DividerColor, thickness = 0.2.dp)
+
+        FeedItem(
+            feed = Feed(
+                userNickName = "deassis",
+                localName = "Tiradentes - MG",
+                userAvatar = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatarfiles.alphacoders.com%2F216%2Fthumb-1920-216277.jpg&f=1&nofb=1&ipt=84259aa182480965fe70beae8ebcbd8baf38b4cdf133129fa71f03f7b8b33af6&ipo=images",
+                imageUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp2861081.jpg&f=1&nofb=1&ipt=65713b41e1f29031a9b1380a4722f8a0ffcf19615e32f4d6303a814dc8ce4209&ipo=images",
+                description = "De quando aprendi a usar o chidore",
+                postedAgo = "Há 21 horas"
+            )
+        )
     }
 }
 
