@@ -1,5 +1,6 @@
 package com.example.instagramclone.ui.view
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,14 +21,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.instagramclone.R
 import com.example.instagramclone.data.model.Feed
+import com.example.instagramclone.ui.theme.Gray
 import com.example.instagramclone.ui.theme.spacingLarge
 import com.example.instagramclone.ui.theme.spacingMedium
 import com.example.instagramclone.ui.theme.spacingSmall
@@ -105,28 +110,19 @@ fun FeedItem(feed: Feed) {
                 .padding(start = spacingMedium)
                 .padding(top = spacingLarge)
         ) {
-            Image(
-                painter = painterResource(id = likeIcon),
-                contentDescription = likeContentDesc,
-                modifier = Modifier
-                    .size(40.dp)
-                    .padding(end = spacingLarge)
+            FeedIcon(
+                icon = likeIcon,
+                contentDesc = likeContentDesc
             )
 
-            Image(
-                painter = painterResource(id = messageIcon),
-                contentDescription = messageContentDesc,
-                modifier = Modifier
-                    .size(40.dp)
-                    .padding(end = spacingLarge)
+            FeedIcon(
+                icon = messageIcon,
+                contentDesc = messageContentDesc
             )
 
-            Image(
-                painter = painterResource(id = commentIcon),
-                contentDescription = commentContentDesc,
-                modifier = Modifier
-                    .size(40.dp)
-                    .padding(end = spacingLarge)
+            FeedIcon(
+                icon = commentIcon,
+                contentDesc = commentContentDesc
             )
 
             Image(
@@ -139,7 +135,57 @@ fun FeedItem(feed: Feed) {
                     .wrapContentWidth(align = Alignment.End)
             )
         }
+
+        Row(
+            modifier = Modifier
+                .padding(horizontal = spacingMedium)
+                .padding(top = spacingLarge)
+        ) {
+            val description = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Bold
+                    )
+                ) {
+                    append(feed.userNickName)
+                }
+                append(" ")
+                append(feed.description)
+            }
+
+            Text(
+                text = description,
+                modifier = Modifier.padding(horizontal = spacingSmall),
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Start
+            )
+        }
+
+        Text(
+            text = feed.postedAgo,
+            modifier = Modifier
+                .padding(start = 12.dp)
+                .padding(top = spacingSmall),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = Gray,
+            textAlign = TextAlign.Start
+        )
     }
+}
+
+@Composable
+fun FeedIcon(
+    @DrawableRes icon: Int,
+    contentDesc: String,
+) {
+    Image(
+        painter = painterResource(id = icon),
+        contentDescription = contentDesc,
+        modifier = Modifier
+            .size(40.dp)
+            .padding(end = spacingLarge)
+    )
 }
 
 @Preview(showBackground = true)
