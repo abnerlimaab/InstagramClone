@@ -1,10 +1,9 @@
 package com.example.instagramclone.ui.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
@@ -22,19 +21,24 @@ import com.example.instagramclone.ui.theme.spacingMedium
 
 @Composable
 fun HomeScreen() {
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(top = 16.dp)
     ) {
-        InstagramToolBar()
+        item {
+            InstagramToolBar()
+        }
 
-        StoryList(stories = stories)
+        item {
+            StoryList(stories = stories)
+        }
 
-        HorizontalDivider(color = DividerColor, thickness = 0.2.dp)
+        item {
+            HorizontalDivider(color = DividerColor, thickness = 0.2.dp)
+        }
 
-        FeedList(feeds = feedList)
+        feedList(feedList = feedList)
     }
 }
 
@@ -49,14 +53,11 @@ fun StoryList(stories: List<Story>) {
     }
 }
 
-@Composable
-fun FeedList(feeds: List<Feed>) {
-    LazyColumn (
-        modifier = Modifier.padding(top = spacingMedium)
-    ) {
-        itemsIndexed(feeds) { _, item ->
-            FeedItem(feed = item)
-        }
+fun LazyListScope.feedList(
+    feedList: List<Feed>
+) {
+    itemsIndexed(feedList) { _, item ->
+        FeedItem(feed = item)
     }
 }
 
