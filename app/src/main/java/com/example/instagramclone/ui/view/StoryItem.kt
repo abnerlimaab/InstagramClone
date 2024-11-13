@@ -23,6 +23,7 @@ import coil3.compose.AsyncImage
 import com.example.instagramclone.R
 import com.example.instagramclone.data.model.Story
 import com.example.instagramclone.data.repository.stories
+import com.example.instagramclone.ui.theme.InstagramCloneTheme
 import com.example.instagramclone.ui.theme.StoryCircleColor
 import com.example.instagramclone.ui.theme.spacingSmall
 
@@ -60,5 +61,15 @@ fun StoryItem(story: Story) {
 @Preview(showBackground = true)
 @Composable
 fun StoryItemPreview() {
-    StoryItem(story = stories[0])
+    InstagramCloneTheme {
+        StoryItem(story = stories[0])
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StoryItemDarkPreview() {
+    InstagramCloneTheme(darkTheme = true) {
+        StoryItem(story = stories[0])
+    }
 }

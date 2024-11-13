@@ -16,7 +16,7 @@ import com.example.instagramclone.data.model.Feed
 import com.example.instagramclone.data.model.Story
 import com.example.instagramclone.data.repository.feedList
 import com.example.instagramclone.data.repository.stories
-import com.example.instagramclone.ui.theme.DividerColor
+import com.example.instagramclone.ui.theme.InstagramCloneTheme
 import com.example.instagramclone.ui.theme.spacingMedium
 
 @Composable
@@ -35,7 +35,7 @@ fun HomeScreen() {
         }
 
         item {
-            HorizontalDivider(color = DividerColor, thickness = 0.2.dp)
+            HorizontalDivider(color = MaterialTheme.colorScheme.onSurface, thickness = 0.2.dp)
         }
 
         feedList(feedList = feedList)
@@ -64,5 +64,15 @@ fun LazyListScope.feedList(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    InstagramCloneTheme {
+        HomeScreen()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenDarkPreview() {
+    InstagramCloneTheme(darkTheme = true) {
+        HomeScreen()
+    }
 }
