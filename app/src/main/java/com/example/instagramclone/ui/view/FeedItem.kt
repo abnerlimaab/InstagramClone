@@ -1,5 +1,6 @@
 package com.example.instagramclone.ui.view
 
+import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,12 +27,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,8 +60,11 @@ fun FeedItem(feed: Feed) {
     val feedImageContentDesc = stringResource(R.string.content_description_feed_image)
     val likeContentDesc = stringResource(R.string.button_like_content_description)
     val messageContentDesc = stringResource(R.string.button_message_content_description)
-    val commentContentDesc = stringResource(R.string.button_coment_content_description)
+    val commentContentDesc = stringResource(R.string.button_comment_content_description)
     val bookmarkContentDesc = stringResource(R.string.button_bookmark_content_description)
+    val messageToastText = stringResource(R.string.button_message_toast_text)
+    val commentToastText = stringResource(R.string.button_comment_toast_text)
+    val bookmarkToastText = stringResource(R.string.button_bookmark_toast_text)
 
     var isLiked by rememberSaveable {
         mutableStateOf(false)
@@ -68,6 +72,9 @@ fun FeedItem(feed: Feed) {
 
     val iconsColor = MaterialTheme.colorScheme.onBackground
     val likedColor = if (isLiked) Color.Red else iconsColor
+
+    val context = LocalContext.current
+    val duration = Toast.LENGTH_SHORT
 
     Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
         Row(
@@ -94,8 +101,7 @@ fun FeedItem(feed: Feed) {
                         .padding(start = spacingMedium),
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
+                    overflow = TextOverflow.Ellipsis
                 )
 
                 Text(
@@ -104,8 +110,7 @@ fun FeedItem(feed: Feed) {
                         .fillMaxWidth()
                         .padding(start = spacingMedium),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -137,11 +142,15 @@ fun FeedItem(feed: Feed) {
 
             FeedIcon(
                 icon = messageIcon, contentDesc = messageContentDesc, color = iconsColor
-            ) {}
+            ) {
+                Toast.makeText(context, messageToastText, duration).show()
+            }
 
             FeedIcon(
                 icon = commentIcon, contentDesc = commentContentDesc, color = iconsColor
-            ) {}
+            ) {
+                Toast.makeText(context, commentToastText, duration).show()
+            }
 
             Image(
                 painter = painterResource(id = bookmarkIcon),
@@ -150,7 +159,10 @@ fun FeedItem(feed: Feed) {
                     .size(40.dp)
                     .padding(end = spacingLarge)
                     .weight(1f)
-                    .wrapContentWidth(align = Alignment.End),
+                    .wrapContentWidth(align = Alignment.End)
+                    .clickable {
+                        Toast.makeText(context, bookmarkToastText, duration).show()
+                    },
                 colorFilter = ColorFilter.tint(iconsColor)
             )
         }
@@ -175,8 +187,7 @@ fun FeedItem(feed: Feed) {
             Text(
                 text = description,
                 modifier = Modifier.padding(horizontal = spacingSmall),
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start
+                overflow = TextOverflow.Ellipsis
             )
         }
 
@@ -187,8 +198,7 @@ fun FeedItem(feed: Feed) {
                 .padding(top = spacingSmall),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            color = Gray,
-            textAlign = TextAlign.Start
+            color = Gray
         )
     }
 }

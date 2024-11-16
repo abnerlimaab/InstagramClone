@@ -24,7 +24,9 @@ import com.example.instagramclone.ui.theme.spacingMedium
 
 @Composable
 fun InstagramToolBar() {
-    val instagramLabel = stringResource(id = R.string.app_name)
+    val instagramLabel = stringResource(R.string.app_name)
+    val notificationContentDesc = stringResource(R.string.content_description_notification_icon)
+    val messageContentDesc = stringResource(R.string.content_description_message_icon)
 
     val iconsColor = MaterialTheme.colorScheme.onBackground
 
@@ -49,7 +51,7 @@ fun InstagramToolBar() {
                 modifier = Modifier
                     .size(32.dp)
                     .padding(end = spacingMedium),
-                contentDescription = stringResource(R.string.content_description_notification_icon),
+                contentDescription = notificationContentDesc,
                 colorFilter = ColorFilter.tint(iconsColor)
             )
 
@@ -58,7 +60,7 @@ fun InstagramToolBar() {
                 modifier = Modifier
                     .size(32.dp)
                     .padding(end = spacingMedium),
-                contentDescription = stringResource(R.string.content_description_message_icon),
+                contentDescription = messageContentDesc,
                 colorFilter = ColorFilter.tint(iconsColor)
             )
         }
