@@ -68,6 +68,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Coil
-    implementation("io.coil-kt.coil3:coil-compose:3.0.1")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.1")
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
